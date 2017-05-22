@@ -484,8 +484,8 @@ msgstr "全て閉じる(&S)"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tF6"
-msgstr "ペインを変更する(&P)\tF6"
+msgid "Change &Pane\tAlt+PgDown"
+msgstr "ペインを変更する(&P)\tAlt+PgDown"
 
 #: Merge.rc:126
 #: Merge.rc:248
@@ -875,7 +875,7 @@ msgstr "マージンを表示(&M)"
 
 #: Merge.rc:451
 #, c-format
-msgid "W&rap Lines"
+msgid "W&rap Lines\tCtrl+Shift+W"
 msgstr "行を右端で折返す(&R)"
 
 #: Merge.rc:452

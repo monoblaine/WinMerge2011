@@ -486,8 +486,8 @@ msgstr "Alles &Sluiten"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tF6"
-msgstr "&Venster wijzigen\tF6"
+msgid "Change &Pane\tAlt+PgDown"
+msgstr "&Venster wijzigen\tAlt+PgDown"
 
 #: Merge.rc:126
 #: Merge.rc:248
@@ -877,8 +877,8 @@ msgstr "Bekijk &marges"
 
 #: Merge.rc:451
 #, c-format
-msgid "W&rap Lines"
-msgstr "Automatische te&rugloop"
+msgid "W&rap Lines\tCtrl+Shift+W"
+msgstr "Automatische te&rugloop\tCtrl+Shift+W"
 
 #: Merge.rc:452
 #, c-format

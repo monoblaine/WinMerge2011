@@ -484,8 +484,8 @@ msgstr ""
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tF6"
-msgstr "&Endre vindu\tF6"
+msgid "Change &Pane\tAlt+PgDown"
+msgstr "&Endre vindu\tAlt+PgDown"
 
 #: Merge.rc:126
 #: Merge.rc:248
@@ -875,7 +875,7 @@ msgstr ""
 
 #: Merge.rc:451
 #, c-format
-msgid "W&rap Lines"
+msgid "W&rap Lines\tCtrl+Shift+W"
 msgstr ""
 
 #: Merge.rc:452

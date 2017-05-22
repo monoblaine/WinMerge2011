@@ -485,8 +485,8 @@ msgstr "Închid&e toate"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tF6"
-msgstr "Schimbã &panou\tF6"
+msgid "Change &Pane\tAlt+PgDown"
+msgstr "Schimbã &panou\tAlt+PgDown"
 
 #: Merge.rc:126
 #: Merge.rc:248
@@ -876,8 +876,8 @@ msgstr "Afiºeazã &marginile"
 
 #: Merge.rc:451
 #, c-format
-msgid "W&rap Lines"
-msgstr "Infãºoa&rã rândurile lungi"
+msgid "W&rap Lines\tCtrl+Shift+W"
+msgstr "Infãºoa&rã rândurile lungi\tCtrl+Shift+W"
 
 #: Merge.rc:452
 #, c-format

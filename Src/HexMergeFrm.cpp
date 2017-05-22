@@ -345,8 +345,9 @@ LRESULT CHexMergeFrame::OnWndMsg<WM_COMMAND>(WPARAM wParam, LPARAM lParam)
 		UpdateCmdUI();
 		break;
 	case ID_NEXT_PANE:
+    case ID_PREV_PANE:
 	case ID_WINDOW_CHANGE_PANE:
-		if (HWindow *pWndNext = GetNextDlgTabItem(HWindow::GetFocus()))
+		if (HWindow *pWndNext = GetNextDlgTabItem(HWindow::GetFocus(), id == ID_PREV_PANE))
 		{
 			pWndNext->SetFocus();
 		}

@@ -485,8 +485,8 @@ msgstr "Zapri &vse"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tF6"
-msgstr "Preklopi &okvirja\tF6"
+msgid "Change &Pane\tAlt+PgDown"
+msgstr "Preklopi &okvirja\tAlt+PgDown"
 
 #: Merge.rc:126
 #: Merge.rc:248
@@ -876,8 +876,8 @@ msgstr "Prikaži &robove"
 
 #: Merge.rc:451
 #, c-format
-msgid "W&rap Lines"
-msgstr "Pr&elomi vrstice"
+msgid "W&rap Lines\tCtrl+Shift+W"
+msgstr "Pr&elomi vrstice\tCtrl+Shift+W"
 
 #: Merge.rc:452
 #, c-format

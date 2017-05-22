@@ -121,7 +121,7 @@ IDR_DIRDOCTYPE MENU
         MENUITEM "Cl&ose", ID_FILE_CLOSE
         MENUITEM "Clo&se All", ID_WINDOW_CLOSEALL
         MENUITEM SEPARATOR
-        MENUITEM "Change &Pane\tF6", ID_WINDOW_CHANGE_PANE
+        MENUITEM "Change &Pane\tAlt+PgDown", ID_WINDOW_CHANGE_PANE
         MENUITEM SEPARATOR
         MENUITEM "Tile &Horizontally", ID_WINDOW_TILE_HORZ
         MENUITEM "Tile &Vertically", ID_WINDOW_TILE_VERT
@@ -243,7 +243,7 @@ IDR_HEXDOCTYPE MENU
         MENUITEM "Cl&ose", ID_FILE_CLOSE
         MENUITEM "Clo&se All", ID_WINDOW_CLOSEALL
         MENUITEM SEPARATOR
-        MENUITEM "Change &Pane\tF6", ID_WINDOW_CHANGE_PANE
+        MENUITEM "Change &Pane\tAlt+PgDown", ID_WINDOW_CHANGE_PANE
         MENUITEM SEPARATOR
         MENUITEM "Tile &Horizontally", ID_WINDOW_TILE_HORZ
         MENUITEM "Tile &Vertically", ID_WINDOW_TILE_VERT
@@ -317,7 +317,7 @@ IDR_MAINFRAME MENU
         MENUITEM "Cl&ose", ID_FILE_CLOSE
         MENUITEM "Clo&se All", ID_WINDOW_CLOSEALL
         MENUITEM SEPARATOR
-        MENUITEM "Change &Pane\tF6", ID_WINDOW_CHANGE_PANE
+        MENUITEM "Change &Pane\tAlt+PgDown", ID_WINDOW_CHANGE_PANE
         MENUITEM SEPARATOR
         MENUITEM "Tile &Horizontally", ID_WINDOW_TILE_HORZ
         MENUITEM "Tile &Vertically", ID_WINDOW_TILE_VERT
@@ -448,7 +448,7 @@ IDR_MERGEDOCTYPE MENU
         MENUITEM "Vie&w Line Differences", ID_VIEW_LINEDIFFS, HELP
         MENUITEM "View Line &Numbers", ID_VIEW_LINENUMBERS, HELP
         MENUITEM "View &Margins", ID_VIEW_FILEMARGIN, HELP
-        MENUITEM "W&rap Lines", ID_VIEW_WORDWRAP, HELP
+        MENUITEM "W&rap Lines\tCtrl+Shift+W", ID_VIEW_WORDWRAP, HELP
         MENUITEM "Separate combining characters\tCtrl+M", ID_VIEW_SEPARATE_COMBINING_CHARS, HELP
         MENUITEM SEPARATOR
         MENUITEM "Sw&ap Panes\tCtrl+U", ID_VIEW_SWAPPANES
@@ -506,7 +506,7 @@ IDR_MERGEDOCTYPE MENU
         MENUITEM "Cl&ose", ID_FILE_CLOSE
         MENUITEM "Clo&se All", ID_WINDOW_CLOSEALL
         MENUITEM SEPARATOR
-        MENUITEM "Change &Pane\tF6", ID_WINDOW_CHANGE_PANE
+        MENUITEM "Change &Pane\tAlt+PgDown", ID_WINDOW_CHANGE_PANE
         MENUITEM SEPARATOR
         MENUITEM "Tile &Horizontally", ID_WINDOW_TILE_HORZ
         MENUITEM "Tile &Vertically", ID_WINDOW_TILE_VERT
@@ -2055,7 +2055,7 @@ STRINGTABLE
     ID_VIEW_LINEDIFFS             "Shows differences inside lines with different colors\nShow Line Difference"
     ID_VIEW_SWAPPANES             "Swap the positions of the two panes"
     ID_VIEW_LINENUMBERS           "Shows line numbers\nShow Line Numbers"
-    ID_VIEW_WORDWRAP              "Enable word wrap\nWrap Lines"
+    ID_VIEW_WORDWRAP              "Enable word wrap\nWrap Lines (Ctrl+Shift+W)"
     ID_VIEW_FILEMARGIN            "Shows selection margins for both panes\nShow Selection Margins"
     ID_VIEW_ZOOMIN                "Increase text size"
     ID_VIEW_ZOOMOUT               "Decrease text size"
@@ -2144,6 +2144,7 @@ IDR_MAINFRAME ACCELERATORS
     "U",            ID_EDIT_UPPERCASE, VIRTKEY, CONTROL, SHIFT
     "V",            ID_EDIT_PASTE, VIRTKEY, CONTROL
     "W",            ID_FILE_CLOSE, VIRTKEY, CONTROL
+    "W",            ID_VIEW_WORDWRAP, VIRTKEY, CONTROL, SHIFT
     "X",            ID_EDIT_CUT, VIRTKEY, CONTROL
     "Y",            ID_EDIT_REDO, VIRTKEY, CONTROL
     "Z",            ID_EDIT_UNDO, VIRTKEY, CONTROL
@@ -2159,8 +2160,9 @@ IDR_MAINFRAME ACCELERATORS
     VK_F4,         ID_SELECT_PREV_LINEDIFF, VIRTKEY, SHIFT
     VK_F5,         ID_REFRESH, VIRTKEY
     VK_F5,         ID_DIR_RESCAN, VIRTKEY, CONTROL
-    VK_F6,         ID_NEXT_PANE, VIRTKEY
-    VK_F6,         ID_PREV_PANE, VIRTKEY, SHIFT
+    VK_NEXT,       ID_NEXT_PANE, VIRTKEY, ALT
+    VK_PRIOR,      ID_PREV_PANE, VIRTKEY, ALT
+    VK_F6,         ID_DIFF_PANE, VIRTKEY
     VK_F9,         ID_FILE_MERGINGMODE, VIRTKEY
     VK_HOME,       ID_FIRSTDIFF, VIRTKEY, ALT
     VK_INSERT,     ID_EDIT_COPY, VIRTKEY, CONTROL

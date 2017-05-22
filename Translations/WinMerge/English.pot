@@ -481,7 +481,7 @@ msgstr ""
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tF6"
+msgid "Change &Pane\tAlt+PgDown"
 msgstr ""
 
 #: Merge.rc:126
@@ -872,7 +872,7 @@ msgstr ""
 
 #: Merge.rc:451
 #, c-format
-msgid "W&rap Lines"
+msgid "W&rap Lines\tCtrl+Shift+W"
 msgstr ""
 
 #: Merge.rc:452
@@ -4935,7 +4935,7 @@ msgstr ""
 
 #: Merge.rc:2058
 #, c-format
-msgid "Enable word wrap\nWrap Lines"
+msgid "Enable word wrap\nWrap Lines (Ctrl+Shift+W)"
 msgstr ""
 
 #: Merge.rc:2059

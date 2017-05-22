@@ -486,8 +486,8 @@ msgstr "Alle s&chlieﬂen"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tF6"
-msgstr "&Ausschnitt wechseln\tF6"
+msgid "Change &Pane\tAlt+PgDown"
+msgstr "&Ausschnitt wechseln\tAlt+PgDown"
 
 #: Merge.rc:126
 #: Merge.rc:248
@@ -877,8 +877,8 @@ msgstr "&R‰nder anzeigen"
 
 #: Merge.rc:451
 #, c-format
-msgid "W&rap Lines"
-msgstr "Zeilen &umbrechen"
+msgid "W&rap Lines\tCtrl+Shift+W"
+msgstr "Zeilen &umbrechen\tCtrl+Shift+W"
 
 #: Merge.rc:452
 #, c-format

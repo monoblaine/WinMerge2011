@@ -485,8 +485,8 @@ msgstr "全部关闭(&S)"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tF6"
-msgstr "切换窗格(&P)\tF6"
+msgid "Change &Pane\tAlt+PgDown"
+msgstr "切换窗格(&P)\tAlt+PgDown"
 
 #: Merge.rc:126
 #: Merge.rc:248
@@ -876,7 +876,7 @@ msgstr "显示页边(&M)"
 
 #: Merge.rc:451
 #, c-format
-msgid "W&rap Lines"
+msgid "W&rap Lines\tCtrl+Shift+W"
 msgstr "自动换行(&R)"
 
 #: Merge.rc:452

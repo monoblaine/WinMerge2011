@@ -80,6 +80,7 @@
 // Misc
 #define ID_NEXT_PANE                    0xE150
 #define ID_PREV_PANE                    0xE151
+#define ID_DIFF_PANE                    0xE152
 
 // Format
 #define ID_FORMAT_FONT                  0xE160

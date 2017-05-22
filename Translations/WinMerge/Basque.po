@@ -476,8 +476,8 @@ msgstr "I&txi Denak"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tF6"
-msgstr "Aldatu &Panela\tF6"
+msgid "Change &Pane\tAlt+PgDown"
+msgstr "Aldatu &Panela\tAlt+PgDown"
 
 #: Merge.rc:126
 #: Merge.rc:248
@@ -867,8 +867,8 @@ msgstr "Ikusi &Bazterrak"
 
 #: Merge.rc:451
 #, c-format
-msgid "W&rap Lines"
-msgstr "I&nguratu Lerroak"
+msgid "W&rap Lines\tCtrl+Shift+W"
+msgstr "I&nguratu Lerroak\tCtrl+Shift+W"
 
 #: Merge.rc:452
 #, c-format

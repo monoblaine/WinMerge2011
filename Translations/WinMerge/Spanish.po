@@ -487,8 +487,8 @@ msgstr "Cerrar &Todas"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tF6"
-msgstr "Cambiar &Panel\tF6"
+msgid "Change &Pane\tAlt+PgDown"
+msgstr "Cambiar &Panel\tAlt+PgDown"
 
 #: Merge.rc:126
 #: Merge.rc:248
@@ -878,8 +878,8 @@ msgstr "Ver &márgenes"
 
 #: Merge.rc:451
 #, c-format
-msgid "W&rap Lines"
-msgstr "&Ajuste de línea"
+msgid "W&rap Lines\tCtrl+Shift+W"
+msgstr "&Ajuste de línea\tCtrl+Shift+W"
 
 #: Merge.rc:452
 #, c-format

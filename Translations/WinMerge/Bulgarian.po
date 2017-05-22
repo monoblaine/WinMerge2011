@@ -485,8 +485,8 @@ msgstr "Затвори &всички"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tF6"
-msgstr "Смени &листа\tF6"
+msgid "Change &Pane\tAlt+PgDown"
+msgstr "Смени &листа\tAlt+PgDown"
 
 #: Merge.rc:126
 #: Merge.rc:248
@@ -876,8 +876,8 @@ msgstr "Покажи граници"
 
 #: Merge.rc:451
 #, c-format
-msgid "W&rap Lines"
-msgstr "Отрежи дългите редове"
+msgid "W&rap Lines\tCtrl+Shift+W"
+msgstr "Отрежи дългите редове\tCtrl+Shift+W"
 
 #: Merge.rc:452
 #, c-format

@@ -485,8 +485,8 @@ msgstr "Stä&ng alla"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tF6"
-msgstr "Växla fil\tF6"
+msgid "Change &Pane\tAlt+PgDown"
+msgstr "Växla fil\tAlt+PgDown"
 
 #: Merge.rc:126
 #: Merge.rc:248
@@ -876,8 +876,8 @@ msgstr "Visa &marginaler"
 
 #: Merge.rc:451
 #, c-format
-msgid "W&rap Lines"
-msgstr "R&adbryt rader"
+msgid "W&rap Lines\tCtrl+Shift+W"
+msgstr "R&adbryt rader\tCtrl+Shift+W"
 
 #: Merge.rc:452
 #, c-format
