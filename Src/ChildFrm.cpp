@@ -747,7 +747,7 @@ LRESULT CChildFrame::OnWndMsg<WM_COMMAND>(WPARAM wParam, LPARAM lParam)
 	case ID_DIFF_PANE: {
 			CMergeDiffDetailView *leftDetailView = GetLeftDetailView();
 			CMergeDiffDetailView *rightDetailView = GetRightDetailView();
-		
+
 			if (leftDetailView && rightDetailView) {
 				if (!leftDetailView->HasFocus() || rightDetailView->HasFocus()) {
 					leftDetailView->SetFocus();
