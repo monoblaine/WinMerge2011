@@ -483,14 +483,28 @@ LRESULT CDirFrame::OnWndMsg<WM_COMMAND>(WPARAM wParam, LPARAM lParam)
 	case IDC_STATIC_TITLE_RIGHT:
 		InitMrgmanCompare();
 		break;
-	case ID_NEXT_PANE:
-	case ID_PREV_PANE:
-	case ID_WINDOW_CHANGE_PANE:
-		if (HWindow *pWndNext = GetNextDlgTabItem(HWindow::GetFocus(), id == ID_PREV_PANE))
+	case ID_RIGHT_PANE:
+	case ID_LEFT_PANE:
+	case ID_WINDOW_CHANGE_PANE: {
+		HWindow *pWndNext = GetNextDlgTabItem(HWindow::GetFocus());
+
+		if (id == ID_LEFT_PANE) {
+			while ((pWndNext->GetStyle() & WS_VSCROLL) != 0) {
+				pWndNext = GetNextDlgTabItem(pWndNext);
+			}
+		}
+		else if (id == ID_RIGHT_PANE) {
+			while ((pWndNext->GetStyle() & WS_VSCROLL) == 0) {
+				pWndNext = GetNextDlgTabItem(pWndNext);
+			}
+		}
+
+		if (pWndNext)
 		{
 			pWndNext->SetFocus();
 		}
-		break;
+	}
+	break;
 	case IDCANCEL:
 		PostMessage(WM_CLOSE);
 		break;

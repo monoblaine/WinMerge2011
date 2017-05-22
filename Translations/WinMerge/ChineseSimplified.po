@@ -485,8 +485,8 @@ msgstr "全部关闭(&S)"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tAlt+PgDown"
-msgstr "切换窗格(&P)\tAlt+PgDown"
+msgid "Change &Pane\tF12"
+msgstr "切换窗格(&P)\tF12"
 
 #: Merge.rc:126
 #: Merge.rc:248

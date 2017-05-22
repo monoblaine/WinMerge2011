@@ -78,8 +78,8 @@
 #define ID_DEFAULT_HELP                 0xE147      // last attempt
 
 // Misc
-#define ID_NEXT_PANE                    0xE150
-#define ID_PREV_PANE                    0xE151
+#define ID_RIGHT_PANE                   0xE150
+#define ID_LEFT_PANE                    0xE151
 #define ID_DIFF_PANE                    0xE152
 
 // Format

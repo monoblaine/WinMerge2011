@@ -476,8 +476,8 @@ msgstr "I&txi Denak"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tAlt+PgDown"
-msgstr "Aldatu &Panela\tAlt+PgDown"
+msgid "Change &Pane\tF12"
+msgstr "Aldatu &Panela\tF12"
 
 #: Merge.rc:126
 #: Merge.rc:248

@@ -486,8 +486,8 @@ msgstr "Alles &Sluiten"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tAlt+PgDown"
-msgstr "&Venster wijzigen\tAlt+PgDown"
+msgid "Change &Pane\tF12"
+msgstr "&Venster wijzigen\tF12"
 
 #: Merge.rc:126
 #: Merge.rc:248

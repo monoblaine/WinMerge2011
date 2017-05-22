@@ -485,8 +485,8 @@ msgstr "Z&avøít vše"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tAlt+PgDown"
-msgstr "Z&mìnit panel\tAlt+PgDown"
+msgid "Change &Pane\tF12"
+msgstr "Z&mìnit panel\tF12"
 
 #: Merge.rc:126
 #: Merge.rc:248

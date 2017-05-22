@@ -486,8 +486,8 @@ msgstr "Alle s&chlieﬂen"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tAlt+PgDown"
-msgstr "&Ausschnitt wechseln\tAlt+PgDown"
+msgid "Change &Pane\tF12"
+msgstr "&Ausschnitt wechseln\tF12"
 
 #: Merge.rc:126
 #: Merge.rc:248

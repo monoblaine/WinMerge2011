@@ -483,8 +483,8 @@ msgstr "Fermer &tout"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tAlt+PgDown"
-msgstr "Chan&ger de fenêtre\tAlt+PgDown"
+msgid "Change &Pane\tF12"
+msgstr "Chan&ger de fenêtre\tF12"
 
 #: Merge.rc:126
 #: Merge.rc:248

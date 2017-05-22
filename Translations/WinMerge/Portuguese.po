@@ -486,8 +486,8 @@ msgstr "Fechar &Todas"
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tAlt+PgDown"
-msgstr "Mudar &Vista\tAlt+PgDown"
+msgid "Change &Pane\tF12"
+msgstr "Mudar &Vista\tF12"
 
 #: Merge.rc:126
 #: Merge.rc:248

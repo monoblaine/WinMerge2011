@@ -484,8 +484,8 @@ msgstr "&s ÈÓÊä åãí "
 #: Merge.rc:320
 #: Merge.rc:509
 #, c-format
-msgid "Change &Pane\tAlt+PgDown"
-msgstr "&P ÊÛííÑ åÇÑæÔ \tAlt+PgDown"
+msgid "Change &Pane\tF12"
+msgstr "&P ÊÛííÑ åÇÑæÔ \tF12"
 
 #: Merge.rc:126
 #: Merge.rc:248
