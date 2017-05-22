@@ -1,0 +1,13 @@
+*.suo
+*.bak
+*.user
+*.ncb
+
+**/Build
+**/BuildTmp
+ipch
+
+*.db
+*.opendb
+/Setup_*.cfg
+/Setup_*.bat
