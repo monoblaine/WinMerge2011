@@ -18,6 +18,7 @@
 #define IDS_HELP_COMPARESAVED           109
 #define IDS_RESELECT_FIRST              110
 #define IDB_WINMERGE                    202
+#define IDB_MELD                        204
 
 // Next default values for new objects
 //

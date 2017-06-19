@@ -134,11 +134,15 @@ CWinMergeShell::CWinMergeShell(HINSTANCE hInstance)
 	// compress or stretch icon bitmap according to menu item height
 	m_MergeBmp = (HBITMAP)LoadImage(m_hInstance, MAKEINTRESOURCE(IDB_WINMERGE), IMAGE_BITMAP,
 		GetSystemMetrics(SM_CXMENUCHECK), GetSystemMetrics(SM_CYMENUCHECK), LR_DEFAULTCOLOR);
+
+	m_MeldBmp = (HBITMAP) LoadImage(m_hInstance, MAKEINTRESOURCE(IDB_MELD), IMAGE_BITMAP,
+		GetSystemMetrics(SM_CXMENUCHECK), GetSystemMetrics(SM_CYMENUCHECK), LR_DEFAULTCOLOR);
 }
 
 CWinMergeShell::~CWinMergeShell()
 {
 	DeleteObject(m_MergeBmp);
+	DeleteObject(m_MeldBmp);
 }
 
 /// Reads selected paths
@@ -271,7 +275,7 @@ HRESULT CWinMergeShell::GetCommandString(UINT_PTR idCmd, UINT uFlags,
 	}
 	else
 	{
-		if (idCmd > 1)
+		if (idCmd > 2)
 			return E_INVALIDARG;
 	}
 
@@ -299,23 +303,12 @@ HRESULT CWinMergeShell::InvokeCommand(LPCMINVOKECOMMANDINFO pCmdInfo)
 {
 	CRegKeyEx reg;
 	BOOL bCompare = FALSE;
+	BOOL bUseMeld = FALSE;
 	SetWinMergeLocale();
 
 	// If lpVerb really points to a string, ignore this function call and bail out.
 	if (HIWORD(pCmdInfo->lpVerb) != 0)
 		return E_INVALIDARG;
-
-	// Guess path to WinMerge executable
-	TCHAR strWinMergePath[MAX_PATH];
-	GetModuleFileName(m_hInstance, strWinMergePath, _countof(strWinMergePath));
-	PathRemoveFileSpec(strWinMergePath);
-	PathAppend(strWinMergePath, _T("WinMergeU.exe"));
-
-	// Check that file we are trying to execute exists
-	if (!PathFileExists(strWinMergePath))
-		return S_FALSE;
-
-	PathQuoteSpaces(strWinMergePath);
 
 	if (LOWORD(pCmdInfo->lpVerb) == 0)
 	{
@@ -352,16 +345,40 @@ HRESULT CWinMergeShell::InvokeCommand(LPCMINVOKECOMMANDINFO pCmdInfo)
 	{
 		switch (m_dwMenuState)
 		{
+		case MENU_ONESEL_NOPREV:
+			// "Compare..." - user wants to compare this single item and open WinMerge
+			m_strPaths[1].Empty();
+			bCompare = TRUE;
+			break;
+
+		case MENU_ONESEL_PREV:
+			m_strPaths[1] = m_strPaths[0];
+			m_strPaths[0] = m_strPreviousPath;
+			bCompare = TRUE;
+			bUseMeld = TRUE;
+
+			// Forget previous selection
+			if (reg.Open(HKEY_CURRENT_USER, f_RegDir) == ERROR_SUCCESS)
+				reg.WriteString(f_FirstSelection, _T(""));
+			break;
+
+		case MENU_TWOSEL:
+			// "Compare" - compare paths
+			bCompare = TRUE;
+			bUseMeld = TRUE;
+			m_strPreviousPath.Empty();
+			break;
+		}
+	}
+	else if (LOWORD(pCmdInfo->lpVerb) == 2)
+	{
+		switch (m_dwMenuState)
+		{
 		case MENU_ONESEL_PREV:
 			m_strPreviousPath = m_strPaths[0];
 			if (reg.Open(HKEY_CURRENT_USER, f_RegDir) == ERROR_SUCCESS)
 				reg.WriteString(f_FirstSelection, m_strPreviousPath);
 			bCompare = FALSE;
-			break;
-		default:
-			// "Compare..." - user wants to compare this single item and open WinMerge
-			m_strPaths[1].Empty();
-			bCompare = TRUE;
 			break;
 		}
 	}
@@ -370,6 +387,24 @@ HRESULT CWinMergeShell::InvokeCommand(LPCMINVOKECOMMANDINFO pCmdInfo)
 
 	if (bCompare == FALSE)
 		return S_FALSE;
+
+	// Guess path to WinMerge executable
+	TCHAR strWinMergePath[MAX_PATH];
+
+	if (bUseMeld == TRUE)
+		PathCombine(strWinMergePath, _T("C:\\Program Files (x86)\\"), _T("Meld\\Meld.exe"));
+	else
+	{
+		GetModuleFileName(m_hInstance, strWinMergePath, _countof(strWinMergePath));
+		PathRemoveFileSpec(strWinMergePath);
+		PathAppend(strWinMergePath, _T("WinMergeU.exe"));
+	}
+
+	// Check that file we are trying to execute exists
+	if (!PathFileExists(strWinMergePath))
+		return S_FALSE;
+
+	PathQuoteSpaces(strWinMergePath);
 
 	DWORD dwAlter = GetAsyncKeyState(VK_CONTROL) & 0x8000 ? EXT_SUBFOLDERS : 0;
 	CMyComBSTR strCommandLine = FormatCmdLine(
@@ -416,6 +451,7 @@ int CWinMergeShell::DrawAdvancedMenu(HMENU hmenu, UINT uMenuIndex,
 		UINT uidFirstCmd)
 {
 	CMyComBSTR strCompare = GetResourceString(IDS_COMPARE);
+	CMyComBSTR strCompareMeld = _T("Compare (Meld)");
 	CMyComBSTR strCompareEllipsis = GetResourceString(IDS_COMPARE_ELLIPSIS);
 	CMyComBSTR strCompareTo = GetResourceString(IDS_COMPARE_TO);
 	CMyComBSTR strReselect = GetResourceString(IDS_RESELECT_FIRST);
@@ -443,8 +479,12 @@ int CWinMergeShell::DrawAdvancedMenu(HMENU hmenu, UINT uMenuIndex,
 		uMenuIndex++;
 		uidFirstCmd++;
 		InsertMenu(hmenu, uMenuIndex, MF_BYPOSITION, uidFirstCmd,
+			strCompareMeld);
+		uMenuIndex++;
+		uidFirstCmd++;
+		InsertMenu(hmenu, uMenuIndex, MF_BYPOSITION, uidFirstCmd,
 				strReselect);
-		nItemsAdded = 2;
+		nItemsAdded = 3;
 		break;
 
 		// Two items selected
@@ -452,30 +492,55 @@ int CWinMergeShell::DrawAdvancedMenu(HMENU hmenu, UINT uMenuIndex,
 	case MENU_TWOSEL:
 		InsertMenu(hmenu, uMenuIndex, MF_BYPOSITION, uidFirstCmd,
 				strCompare);
-		nItemsAdded = 1;
+		uMenuIndex++;
+		uidFirstCmd++;
+		InsertMenu(hmenu, uMenuIndex, MF_BYPOSITION, uidFirstCmd,
+			strCompareMeld);
+		nItemsAdded = 2;
 		break;
 
 	default:
 		InsertMenu(hmenu, uMenuIndex, MF_BYPOSITION, uidFirstCmd,
 				strCompare);
-		nItemsAdded = 1;
+		uMenuIndex++;
+		uidFirstCmd++;
+		InsertMenu(hmenu, uMenuIndex, MF_BYPOSITION, uidFirstCmd,
+			strCompareMeld);
+		nItemsAdded = 2;
 		break;
 	}
 
 	// Add bitmap
-	if (m_MergeBmp != NULL)
+	if (m_MergeBmp != NULL && m_MergeBmp != NULL)
 	{
-		if (nItemsAdded == 2)
+		if (nItemsAdded == 3)
+		{
+			SetMenuItemBitmaps(hmenu, uMenuIndex - 2, MF_BYPOSITION, m_MergeBmp, NULL);
+			SetMenuItemBitmaps(hmenu, uMenuIndex - 1, MF_BYPOSITION, m_MeldBmp, NULL);
+			SetMenuItemBitmaps(hmenu, uMenuIndex, MF_BYPOSITION, m_MergeBmp, NULL);
+		}
+		else if (nItemsAdded == 2)
+		{
 			SetMenuItemBitmaps(hmenu, uMenuIndex - 1, MF_BYPOSITION, m_MergeBmp, NULL);
-		SetMenuItemBitmaps(hmenu, uMenuIndex, MF_BYPOSITION, m_MergeBmp, NULL);
+			SetMenuItemBitmaps(hmenu, uMenuIndex, MF_BYPOSITION,
+				m_dwMenuState == MENU_ONESEL_NOPREV ? m_MergeBmp : m_MeldBmp, NULL);
+		}
+		else
+			SetMenuItemBitmaps(hmenu, uMenuIndex, MF_BYPOSITION, m_MergeBmp, NULL);
 	}
 
 	// Show menu item as grayed if more than two items selected
 	if (m_nSelectedItems > MaxFileCount)
 	{
-		if (nItemsAdded == 2)
+		switch (nItemsAdded) {
+		case 3:
+			EnableMenuItem(hmenu, uMenuIndex - 2, MF_BYPOSITION | MF_GRAYED);
+		case 2:
 			EnableMenuItem(hmenu, uMenuIndex - 1, MF_BYPOSITION | MF_GRAYED);
-		EnableMenuItem(hmenu, uMenuIndex, MF_BYPOSITION | MF_GRAYED);
+		default:
+			EnableMenuItem(hmenu, uMenuIndex, MF_BYPOSITION | MF_GRAYED);
+			break;
+		}
 	}
 
 	return nItemsAdded;
@@ -520,11 +585,19 @@ CMyComBSTR CWinMergeShell::GetHelpText(UINT_PTR idCmd)
 	{
 		switch (m_dwMenuState)
 		{
-		case MENU_ONESEL_PREV:
-			strHelp = GetResourceString(IDS_HELP_SAVETHIS);
+		case MENU_ONESEL_NOPREV:
+			strHelp = GetResourceString(IDS_CONTEXT_HELP);
 			break;
 		default:
-			strHelp = GetResourceString(IDS_CONTEXT_HELP);
+			strHelp = _T("Compare (Meld)");
+			break;
+		}
+	}
+	else if (idCmd == 2)
+	{
+		switch (m_dwMenuState) {
+		case MENU_ONESEL_PREV:
+			strHelp = GetResourceString(IDS_HELP_SAVETHIS);
 			break;
 		}
 	}
