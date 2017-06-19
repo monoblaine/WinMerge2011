@@ -495,7 +495,7 @@ CMyComBSTR CWinMergeShell::GetHelpText(UINT_PTR idCmd)
 		switch (m_dwMenuState)
 		{
 		case MENU_SIMPLE:
-			strHelp = GetResourceString(IDS_CONTEXT_HELP);;
+			strHelp = GetResourceString(IDS_CONTEXT_HELP);
 			break;
 
 		case MENU_ONESEL_NOPREV:
