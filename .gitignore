@@ -11,3 +11,6 @@ ipch
 *.opendb
 /Setup_*.cfg
 /Setup_*.bat
+
+.vs
+*.sdf
