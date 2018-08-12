@@ -376,7 +376,7 @@ protected:
 	@param bTrackScrollBar TRUE to recalculate the scroll bar after scrolling,
 		else FALSE.
 	*/
-	virtual int ScrollToSubLine(int nNewTopSubLine, bool bRedraw = true);
+	virtual int ScrollToSubLine(int nNewTopSubLine, bool bRedraw = true, bool bNoSmoothScroll = true, bool bTrackScrollBar = true);
 	//END SW
 
 	//  Splitter support

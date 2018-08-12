@@ -602,49 +602,9 @@ void CMergeEditView::ShowDiff(bool bScroll)
 			m_pDocument->UpdateWindow();
 			int nrgScroll[2] =
 			{
-				rgpView[0]->ScrollToSubLine(nLine, false),
-				rgpView[1]->ScrollToSubLine(nLine, false),
+				rgpView[0]->ScrollToSubLine(nLine, true, false),
+				rgpView[1]->ScrollToSubLine(nLine, true, false),
 			};
-			if ((COptionsMgr::Get(OPT_PHONY_EFFECTS) & PHONY_EFFECTS_ENABLE_SCROLL_ANIMATION) &&
-				nrgScroll[0] == nrgScroll[1])
-			{
-				COLORREF const crMargin = rgpView[0]->GetColor(COLORINDEX_SELMARGIN);
-				COLORREF const crBackground = rgpView[0]->GetColor(COLORINDEX_BKGND);
-				// Align scroll delta with brush used to draw deleted lines to avoid visual jitter
-				int nDelta = COptionsMgr::Get(OPT_CROSS_HATCH_DELETED_LINES) == 2 ? GetLineHeight() : 16;
-				if (nrgScroll[0] < 0)
-					nDelta = -nDelta;
-				int nLimit = 5;
-				while (nDelta * (nrgScroll[0] -= nDelta) > 0) // holds until we touch or cross zero
-				{
-					int nSide = 0;
-					do
-					{
-						RECT rcUpdate;
-						if (rgpView[nSide]->ScrollWindowEx(0, nDelta, NULL, NULL, NULL, &rcUpdate))
-						{
-							if (HSurface *const pDC = rgpView[nSide]->GetDC())
-							{
-								rcUpdate.left = rgpView[nSide]->GetMarginWidth() - MARGIN_REV_WIDTH;
-								pDC->SetBkColor(crBackground);
-								pDC->ExtTextOut(0, 0, ETO_OPAQUE, &rcUpdate, NULL, 0, NULL);
-								rcUpdate.right = rcUpdate.left;
-								rcUpdate.left = 0;
-								pDC->SetBkColor(crMargin);
-								pDC->ExtTextOut(0, 0, ETO_OPAQUE, &rcUpdate, NULL, 0, NULL);
-								rgpView[nSide]->ReleaseDC(pDC);
-							}
-						}
-					} while (nSide ^= 1);
-					nrgScroll[1] = nrgScroll[0];
-					if (--nLimit == 0)
-						break;
-					Sleep(20);
-				}
-				nrgScroll[0] = nrgScroll[1];
-			}
-			rgpView[0]->ScrollWindow(0, nrgScroll[0]);
-			rgpView[1]->ScrollWindow(0, nrgScroll[1]);
 		}
 
 		rgpView[0]->SetCursorPos(ptStart);
@@ -653,6 +613,8 @@ void CMergeEditView::ShowDiff(bool bScroll)
 		rgpView[1]->SetAnchor(ptStart);
 		rgpView[0]->SetSelection(ptStart, ptStart);
 		rgpView[1]->SetSelection(ptStart, ptStart);
+
+        Invalidate();
 	}
 }
 

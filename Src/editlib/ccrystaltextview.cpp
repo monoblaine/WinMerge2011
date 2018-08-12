@@ -110,6 +110,8 @@ const COLORREF UNSAVED_REVMARK_CLR = RGB(0xD7, 0xD7, 0x00);
 /** @brief Color of saved line revision mark (green). */
 const COLORREF SAVED_REVMARK_CLR = RGB(0x00, 0xFF, 0x00);
 
+#define SMOOTH_SCROLL_FACTOR		12
+
 #define ICON_INDEX_WRAPLINE         15
 
 static void setAtGrow(std::vector<int> &v, stl_size_t index, int value)
@@ -414,32 +416,106 @@ void CCrystalTextView::ScrollToChar(int nNewOffsetChar)
  * (Kimmo) think it is good for us too.
  * @param [in] nNewTopSubLine New top line for view.
  */
-int CCrystalTextView::ScrollToSubLine(int nNewTopSubLine, bool bRedraw)
+int CCrystalTextView::ScrollToSubLine(int nNewTopSubLine, bool bRedraw, bool bNoSmoothScroll, bool bTrackScrollBar)
 {
 	int nScrollLines = 0;
 	if (m_nTopSubLine != nNewTopSubLine)
 	{
-		// Limit scrolling so that we show one empty line at end of file
-		int const nMaxTopSubLine = GetSubLineCount() - 1;
-		if (nNewTopSubLine > nMaxTopSubLine)
-			nNewTopSubLine = nMaxTopSubLine;
-		if (nNewTopSubLine < 0)
-			nNewTopSubLine = 0;
-		nScrollLines = m_nTopSubLine - nNewTopSubLine;
-		if (nScrollLines)
+		if (bNoSmoothScroll)
 		{
-			nScrollLines *= GetLineHeight();
-			m_nTopSubLine = nNewTopSubLine;
-			// OnDraw() uses m_nTopLine to determine topline
-			GetLineBySubLine(m_nTopSubLine, m_nTopLine);
-			if (bRedraw)
+			// Limit scrolling so that we show one empty line at end of file
+			int const nScreenLines = GetScreenLines();
+			int const nLineCount = GetSubLineCount();
+			int const nMaxTopSubLine = nLineCount - nScreenLines;
+			if (nNewTopSubLine > nMaxTopSubLine)
+				nNewTopSubLine = nMaxTopSubLine;
+			if (nNewTopSubLine < 0)
+				nNewTopSubLine = 0;
+			nScrollLines = m_nTopSubLine - nNewTopSubLine;
+			if (nScrollLines)
 			{
-				ScrollWindow(0, nScrollLines);
-				UpdateWindow();
+				m_nTopSubLine = nNewTopSubLine;
+				// OnDraw() uses m_nTopLine to determine topline
+				GetLineBySubLine(m_nTopSubLine, m_nTopLine);
+				if (bRedraw)
+				{
+					ScrollWindow(0, nScrollLines * GetLineHeight());
+					UpdateWindow();
+				}
+
+				if (bTrackScrollBar)
+					RecalcVertScrollBar(true);
 			}
-			RecalcVertScrollBar(true);
-			GetLineBySubLine(m_nTopSubLine, m_nTopLine);
 		}
+		else
+		{
+			int const nScreenLines = GetScreenLines();
+			int const nLineCount = GetSubLineCount();
+			int const nMaxTopSubLine = nLineCount - nScreenLines;
+			if (nNewTopSubLine > nMaxTopSubLine)
+				nNewTopSubLine = nMaxTopSubLine;
+			if (nNewTopSubLine < 0)
+				nNewTopSubLine = 0;
+
+			// Do smooth scrolling
+			int nLineHeight = GetLineHeight();
+
+			if (m_nTopSubLine > nNewTopSubLine) {
+				int nIncrement = (m_nTopSubLine - nNewTopSubLine) / SMOOTH_SCROLL_FACTOR + 1;
+
+				while (m_nTopSubLine != nNewTopSubLine) {
+					int nTopSubLine = m_nTopSubLine - nIncrement;
+
+					if (nTopSubLine < nNewTopSubLine)
+						nTopSubLine = nNewTopSubLine;
+
+					nScrollLines = nTopSubLine - m_nTopSubLine;
+
+					if (nScrollLines) {
+						m_nTopSubLine = nTopSubLine;
+
+						GetLineBySubLine(m_nTopSubLine, m_nTopLine);
+
+						ScrollWindow(0, -nLineHeight * nScrollLines);
+						UpdateWindow();
+
+						if (bTrackScrollBar)
+							RecalcVertScrollBar(true);
+					}
+
+					Sleep(8);
+				}
+			}
+			else {
+				int nIncrement = (nNewTopSubLine - m_nTopSubLine) / SMOOTH_SCROLL_FACTOR + 1;
+
+				while (m_nTopSubLine != nNewTopSubLine) {
+					int nTopSubLine = m_nTopSubLine + nIncrement;
+
+					if (nTopSubLine > nNewTopSubLine)
+						nTopSubLine = nNewTopSubLine;
+
+					nScrollLines = nTopSubLine - m_nTopSubLine;
+
+					if (nScrollLines) {
+						m_nTopSubLine = nTopSubLine;
+
+						GetLineBySubLine(m_nTopSubLine, m_nTopLine);
+
+						ScrollWindow(0, -nLineHeight * nScrollLines);
+						UpdateWindow();
+
+						if (bTrackScrollBar)
+							RecalcVertScrollBar(true);
+					}
+
+					Sleep(8);
+				}
+			}
+		}
+
+		if (m_nTopSubLine > 0)
+			GetLineBySubLine(m_nTopSubLine, m_nTopLine);
 	}
 	return nScrollLines;
 }
