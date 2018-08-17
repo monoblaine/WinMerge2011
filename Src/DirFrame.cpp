@@ -309,10 +309,10 @@ LRESULT CDirFrame::OnWndMsg<WM_COMMAND>(WPARAM wParam, LPARAM lParam)
 		m_pDirView->OnLastdiff();
 		break;
 	case ID_NEXTDIFF:
-		m_pDirView->OnNextdiff();
+		m_pDirView->DoDefaultAction(m_pDirView->GetFocusedItem());
 		break;
 	case ID_PREVDIFF:
-		m_pDirView->OnPrevdiff();
+		m_pDirView->OpenParentDirectory();
 		break;
 	case ID_CURDIFF:
 		m_pDirView->OnCurdiff();

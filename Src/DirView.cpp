@@ -1982,31 +1982,8 @@ void CDirView::OnUpdateStatusNum()
 	pMDIFrame->UpdateCmdUI<ID_CURDIFF>(
 		GetItemState(focusItem, LVIS_SELECTED) ? MF_ENABLED : MF_GRAYED);
 
-	BYTE enable = MF_GRAYED;
-	int i = focusItem;
-	while (--i >= 0)
-	{
-		const DIFFITEM *di = GetDiffItem(i);
-		if (IsItemNavigableDiff(di))
-		{
-			enable = MF_ENABLED;
-			break;
-		}
-	}
-	pMDIFrame->UpdateCmdUI<ID_PREVDIFF>(enable);
-
-	enable = MF_GRAYED;
-	i = focusItem;
-	while (++i < items)
-	{
-		const DIFFITEM *di = GetDiffItem(i);
-		if (IsItemNavigableDiff(di))
-		{
-			enable = MF_ENABLED;
-			break;
-		}
-	}
-	pMDIFrame->UpdateCmdUI<ID_NEXTDIFF>(enable);
+	pMDIFrame->UpdateCmdUI<ID_PREVDIFF>(MF_ENABLED);
+	pMDIFrame->UpdateCmdUI<ID_NEXTDIFF>(MF_ENABLED);
 
 	String s;
 	if (focusItem == -1)
