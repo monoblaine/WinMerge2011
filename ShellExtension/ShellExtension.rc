@@ -27,7 +27,6 @@ IDR_WINMERGESHELL       REGISTRY                "WinMergeShell.rgs"
 //
 
 IDB_WINMERGE            BITMAP                  "WinMerge.bmp"
-IDB_MELD                BITMAP                  "Meld.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

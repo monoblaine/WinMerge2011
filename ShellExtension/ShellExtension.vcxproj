@@ -242,7 +242,6 @@
     <ClCompile Include="WinMergeShell.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Meld.bmp" />
     <None Include="ShellExtension.def" />
     <None Include="WinMerge.bmp" />
     <None Include="WinMergeShell.rgs" />

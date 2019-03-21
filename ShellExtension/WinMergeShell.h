@@ -41,7 +41,6 @@ protected:
 	CMyComBSTR m_strPaths[2]; /**< Paths for selected items */
 	CMyComBSTR m_strPreviousPath; /**< Previously selected path */
 	HBITMAP m_MergeBmp; /**< Icon */
-	HBITMAP m_MeldBmp; /**< Icon */
 	UINT m_nSelectedItems; /**< Amount of selected items */
 	DWORD m_dwContextMenuEnabled; /**< Is context menu enabled and in which mode? */
 	DWORD m_dwMenuState; /**< Shown menuitems */
