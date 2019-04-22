@@ -56,6 +56,7 @@ void CMergeDiffDetailView::RefreshOptions()
 {
 	// Tab size is set at buffer level, so no need to set it here again
 	SetViewTabs(COptionsMgr::Get(OPT_VIEW_WHITESPACE));
+	SetWordWrapping(COptionsMgr::Get(OPT_WORDWRAP));
 	bool bMixedEOL = COptionsMgr::Get(OPT_ALLOW_MIXED_EOL) ||
 		m_pDocument->IsMixedEOL(m_nThisPane);
 	SetViewEols(COptionsMgr::Get(OPT_VIEW_WHITESPACE), bMixedEOL);
@@ -356,5 +357,4 @@ void CMergeDiffDetailView::OnUpdateCaret(bool bShowHide)
 void CMergeDiffDetailView::DocumentsLoaded()
 {
 	RefreshOptions();
-	SetWordWrapping(FALSE);
 }
